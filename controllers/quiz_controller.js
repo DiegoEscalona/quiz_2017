@@ -254,8 +254,9 @@ exports.randomcheck = function (req, res, next) {
     }
 
     res.render('quizzes/random_result', {
-        score: req.session.score,
+        quiz: req.quiz,
         result: result,
-        answer: answer
+        answer: answer,
+        score: score
     });
 };
