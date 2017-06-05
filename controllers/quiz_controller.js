@@ -238,25 +238,24 @@ exports.randomplay = function (req, res, next) {
     //req.quiz = quiz;
 };
 
-// GET /quizzes/:quizId/randomcheck
+// GET /quizzes/randomcheck/:quizId
 exports.randomcheck = function (req, res, next) {
 
     var answer = req.query.answer || "";
 
     var result = answer.toLowerCase().trim() === req.quiz.answer.toLowerCase().trim();
-    
+
     if (result) {
-        score++;
-    } else {
-        score = 0;
+        req.session.score++;
+    }
+    else{
+        req.session.score=0;
+        req.session.questions=[0];
     }
 
     res.render('quizzes/random_result', {
-        quiz: req.quiz,
+        score: req.session.score,
         result: result,
-        answer: answer,
-        score: score
+        answer: answer
     });
-};
-
 };
